@@ -1,0 +1,25 @@
+{
+  "name": "nodejsand-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esraaamal/nodejsAnd-Express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esraaamal/nodejsAnd-Express/issues"
+  },
+  "homepage": "https://github.com/esraaamal/nodejsAnd-Express#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^6.0.2",
+    "mongoose": "^6.1.0",
+    "nodemon": "^2.0.15"
+  }
+}
