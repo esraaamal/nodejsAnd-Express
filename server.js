@@ -7,7 +7,7 @@ const employeeController=require('./controllers/employeeController')
 var app=express();
 
 app.set('views',path.join(__dirname, '/views/'))
-app.engine('hbs',exphbs({extname:'hbs',defaultLayout:'mainLayout',layoutsDir:__dirname+'/views/layouts/'}))
+app.engine('hbs',exphbs.engine({extname:'hbs',defaultLayout:'mainLayout',layoutsDir:__dirname+'/views/layouts/'}))
 app.set('view engine','hbs');
 
 
