@@ -11,7 +11,10 @@ res.render('employee/addOrEdit',{
 });
 
 router.post('/',(req,res)=>{
-   insertRecord(req,res)
+    if(req.body._id=='')
+   insertRecord(req,res);
+   else
+   updateRecord(req,res);
     });
 
     function insertRecord(req,res)
@@ -38,9 +41,36 @@ employee.save((err,doc)=>{
     }
 });
 }
+function  updateRecord(req,res){
+    Employee.findOneAndUpdate({_id: req.body._id},req.body,{new:true},(err,doc)=>{
+        if(!err){res.redirect('employee/list')}
+        else{
+            if(err.name == 'ValidationError'){
+                handleValidationError(err,req.body);
+                res.render("employee/addOrEdit",{
+                    viewTitle: "Update Employee",
+                    employee:req.body
+                })
+            }
+            else{
+                console.log("Error during record update :"+err)
+            }
+        }
+    })
+
+}
 
 router.get('/list',(req,res)=>{
-    res.json('from list')
+    Employee.find((err,docs)=>{
+        if(!err){
+            res.render("employee/list",{
+                list:docs
+            })
+        }
+        else{
+            console.log('Error in retreving employee list:'+err)
+        }
+    });
 })
 function handelValidationError(err,body){
     for(field in err.errors){
@@ -50,10 +80,35 @@ function handelValidationError(err,body){
                 break;
             case 'email':
                 body['emailError']=err.errors[field].message;
-                break;    
+                break; 
+            default:
+                breake;       
         }
     }
   
 
 }
+
+router.get('/:id',(req,res)=>{
+  Employee.findById(req.params.id,(err,doc)=>{
+      if(!err){
+          res.render("employee/addOrEdit",{
+              viewTitle:"Update Employee",
+              employee:doc
+          })
+      }
+
+  })
+    });
+
+    router.get('/delete/:id',(req,res)=>{
+        Employee.findByIdAndDelete(req.params.id,(err,doc)=>{
+            if(!err){
+                res.redirect('/employee/list')
+            }
+            else{
+                console.log('Error in employee delete:'+err);
+            }
+        });
+    })
 module.exports =router;

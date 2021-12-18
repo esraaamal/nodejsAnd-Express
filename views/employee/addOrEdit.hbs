@@ -1,5 +1,6 @@
 <h3>{{viewTitle}}</h3>
 <form action="/employee" method="POST" autocomplete="off" >
+<input type="hidden" name='id' value="{{employee._id}}">
       <div class="form-group">
 <label for="">Full Name</label>
 <input type="text" class="form-control" name="fullName" placeholder="Full Name" value="{{employee.fullName}}">
@@ -32,5 +33,8 @@
 
 <div class="form-group">
 <button type="submit" class="btn btn-info" style="margin-top:10px;"><i class="fa fa-database"></i>Submit</button>
+<a style="margin-top:10px;" class="btn btn-secondary" href="/employee/list"><i class="fa fa-list-alt"></i>View All</a>
+
+
 </div>
 </form>
